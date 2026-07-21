@@ -1,0 +1,9 @@
+deploy_pkg/
+.venv/
+userdata/
+course_data/.thumb_cache/
+frp.zip
+ngrok.exe
+cloudflared.exe
+gh.exe
+启动.bat
