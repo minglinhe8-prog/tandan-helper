@@ -217,13 +217,14 @@ function doSearch() {
       const isImg=['png','jpg','jpeg','gif','bmp'].includes(f.ext);
       const B={'png':'img','jpg':'img','pdf':'pdf','xlsx':'xls','xls':'xls','pptx':'ppt','ppt':'ppt','txt':'link'};
       let tags=''; if(f.grade) tags+=`<span class=tag>${f.grade}</span>`; if(f.subject) tags+=`<span class=tag>${f.subject}</span>`; if(f.type) tags+=`<span class=tag>${f.type}</span>`;
-      h+=`<div class="card"><div class="card-thumb" onclick="if('${f.ext}'==='png'||'${f.ext}'==='jpg')previewImg('${url}');else window.open('${url}','_blank')">${isImg?`<img src="${url}" loading=lazy onerror="this.innerHTML='<div class=ph>🖼️</div>'">`:`<div class="ph">${f.ext==='pdf'?'📄':f.ext.match(/xls/)?'📊':f.ext.match(/ppt/)?'📽️':'📁'}</div>`}<span class="cb cb-${B[f.ext]||'img'}">${f.ext.toUpperCase()}</span></div><div class="card-body"><div class="card-name">${f.name}</div>${tags?`<div style="margin:4px 0">${tags}</div>`:''}<a class="btn-p" href="${url}" target="_blank" onclick="addHist('${f.path.replace(/'/g,'\\\'')}','${f.name.replace(/'/g,'\\\'')}')">打开</a></div></div>`;
+      h+=`<div class="card"><div class="card-thumb" onclick="if('${f.ext}'==='png'||'${f.ext}'==='jpg')previewImg('${url}');else if('${f.ext}'==='pdf')viewPDF('${url}','${f.name.replace(/'/g,"\'")}');else window.open('${url}','_blank')">${isImg?`<img src="${url}" loading=lazy onerror="this.innerHTML='<div class=ph>🖼️</div>'">`:`<div class="ph">${f.ext==='pdf'?'📄':f.ext.match(/xls/)?'📊':f.ext.match(/ppt/)?'📽️':'📁'}</div>`}<span class="cb cb-${B[f.ext]||'img'}">${f.ext.toUpperCase()}</span></div><div class="card-body"><div class="card-name">${f.name}</div>${tags?`<div style="margin:4px 0">${tags}</div>`:''}<a class="btn-p" href="${url}" target="_blank" onclick="addHist('${f.path.replace(/'/g,'\\\'')}','${f.name.replace(/'/g,'\\\'')}')">打开</a></div></div>`;
     });
     h+='</div>';
   }
   document.getElementById('resultsArea').innerHTML=h||'<div class="empty"><div class="icon">🔍</div><h3>无匹配结果</h3><p>试试调整筛选条件</p></div>';
 }
 function previewImg(url){document.getElementById('modalBody').innerHTML=`<img src="${url}">`;document.getElementById('modal').classList.add('on');}
+function viewPDF(url,name){var body=document.getElementById('modalBody');var modal=document.getElementById('modal');body.innerHTML='<div style="text-align:center;padding:50px;font-size:3rem">📄</div><p style="text-align:center">'+name+' 加载中...</p>';modal.classList.add('on');fetch(url).then(function(r){return r.blob()}).then(function(b){var u=URL.createObjectURL(b);body.innerHTML='<iframe src="'+u+'" style="width:100%;height:80vh;border:none;border-radius:8px"></iframe>';}).catch(function(){body.innerHTML='<div style="text-align:center;padding:50px"><h3>加载失败</h3><a href="'+url+'" target="_blank">直接打开</a></div>';});}
 function resetSearch(){['fGrade','fSubject','fType','fTeacher'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});const si=document.getElementById('searchInput');if(si)si.value='';doSearch();}
 
 // 收藏
