@@ -7,6 +7,8 @@ from datetime import datetime
 from typing import List, Dict, Optional, Union
 from collections import defaultdict
 from PIL import Image
+import requests
+from ai_integration import render_ai_panel, render_policy_card
 
 # ---------- 路径自适应 ----------
 if getattr(sys, 'frozen', False):
@@ -978,6 +980,10 @@ def main():
                     st.rerun()
         else:
             st.caption("暂无搜索记录")
+
+    st.markdown("---")
+    render_ai_panel()
+    render_policy_card()
 
     # 预览面板
     if st.session_state.preview_file:
