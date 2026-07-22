@@ -141,23 +141,16 @@ textarea { resize:vertical; min-height:55px; font-family:inherit; }
 const CATALOG_URL = 'https://raw.githubusercontent.com/minglinhe8-prog/tandan-helper/master/catalog.json';
 const GRADES = ['初一','初二','初三'];
 const SUBJECTS = ['博文','双语','托管','实验P','实验C'];
-// 内嵌 catalog 立即加载
-// catalog loaded async
-var catalog = null, allFiles = [];
+let catalog = null, allFiles = [];
+
+// 双源加载：先试CDN，失败用本地
 async function loadCatalog() {
-  try { const r = await fetch('catalog.json'); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
   try { const r = await fetch(CATALOG_URL); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
+  try { const r = await fetch('catalog.json'); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
   showContent('<div class="empty"><div class="icon">⚠️</div><h3>加载失败</h3><p>请检查网络连接</p></div>');
 }
 function init() { flatten(); bindNav(); renderTab('search'); loadScripts(); }
 loadCatalog();
-
-function flatten() { allFiles = []; for (const [cat, files] of Object.entries(catalog.categories)) files.forEach(f => { f.category = cat; allFiles.push(f); }); }
-
-
-
-// 双源加载：先试CDN，失败用本地
-
 
 function flatten() { allFiles = []; for (const [cat, files] of Object.entries(catalog.categories)) files.forEach(f => { f.category = cat; allFiles.push(f); }); }
 
@@ -227,30 +220,15 @@ function doSearch() {
     items.forEach(f=>{
       const url=f.url||f.cdn_url||f.raw_url;
       const isImg=['png','jpg','jpeg','gif','bmp'].includes(f.ext);
-      const cb={'png':'img','jpg':'img','pdf':'pdf','xlsx':'xls','xls':'xls','pptx':'ppt','ppt':'ppt','txt':'link'};
-      let tags=''; if(f.grade) tags+='<span class=tag>'+f.grade+'</span>'; if(f.subject) tags+='<span class=tag>'+f.subject+'</span>'; if(f.type) tags+='<span class=tag>'+f.type+'</span>';
-      const ename=f.name.replace(/'/g,"&#39;");
-      var oc,bt;
-      if(isImg){oc="previewImg('"+url+"')";}
-      else if(f.ext==='pdf'){oc="viewPDF('"+url+"','"+ename+"','"+url+"')";bt="viewPDF('"+url+"','"+ename+"','"+url+"');addHist('"+f.path.replace(/'/g,"\\'")+"','"+ename+"')";}
-      else{oc="window.open('"+url+"','_blank')";bt="window.open('"+url+"','_blank');addHist('"+f.path.replace(/'/g,"\\'")+"','"+ename+"')";}
-      h+=`<div class="card"><div class="card-thumb" onclick="${oc}">${isImg?`<img src="${url}" loading=lazy onerror="this.innerHTML='<div class=ph>🖼️</div>'">`:`<div class="ph">${f.ext==='pdf'?'📄':f.ext.match(/xls/)?'📊':f.ext.match(/ppt/)?'📽️':'📁'}</div>`}<span class="cb cb-${cb[f.ext]||'img'}">${f.ext.toUpperCase()}</span></div><div class="card-body"><div class="card-name">${f.name}</div>${tags?`<div style="margin:4px 0">${tags}</div>`:''}<a class="btn-p" href="javascript:void(0)" onclick="${bt}">打开</a></div></div>`;
+      const B={'png':'img','jpg':'img','pdf':'pdf','xlsx':'xls','xls':'xls','pptx':'ppt','ppt':'ppt','txt':'link'};
+      let tags=''; if(f.grade) tags+=`<span class=tag>${f.grade}</span>`; if(f.subject) tags+=`<span class=tag>${f.subject}</span>`; if(f.type) tags+=`<span class=tag>${f.type}</span>`;
+      h+=`<div class="card"><div class="card-thumb" onclick="if('${f.ext}'==='png'||'${f.ext}'==='jpg')previewImg('${url}');else window.open('${url}','_blank')">${isImg?`<img src="${url}" loading=lazy onerror="this.innerHTML='<div class=ph>🖼️</div>'">`:`<div class="ph">${f.ext==='pdf'?'📄':f.ext.match(/xls/)?'📊':f.ext.match(/ppt/)?'📽️':'📁'}</div>`}<span class="cb cb-${B[f.ext]||'img'}">${f.ext.toUpperCase()}</span></div><div class="card-body"><div class="card-name">${f.name}</div>${tags?`<div style="margin:4px 0">${tags}</div>`:''}<a class="btn-p" href="${url}" target="_blank" onclick="addHist('${f.path.replace(/'/g,'\\\'')}','${f.name.replace(/'/g,'\\\'')}')">打开</a></div></div>`;
     });
     h+='</div>';
   }
   document.getElementById('resultsArea').innerHTML=h||'<div class="empty"><div class="icon">🔍</div><h3>无匹配结果</h3><p>试试调整筛选条件</p></div>';
 }
 function previewImg(url){document.getElementById('modalBody').innerHTML=`<img src="${url}">`;document.getElementById('modal').classList.add('on');}
-function viewPDF(url,name,link){
-  document.getElementById('modalBody').innerHTML=`<div style="text-align:center;padding:40px"><div class="icon" style="font-size:3rem">📄</div><p style="margin:8px 0">${name}</p><p style="font-size:0.75rem;color:var(--ts)">PDF 加载中...</p></div>`;
-  document.getElementById('modal').classList.add('on');
-  fetch(url).then(r=>r.blob()).then(b=>{
-    var u=URL.createObjectURL(b);
-    document.getElementById('modalBody').innerHTML=`<iframe src="${u}" style="width:100%;height:80vh;border:none;border-radius:8px" onload="this.style.background='none'"></iframe>`;
-  }).catch(e=>{
-    document.getElementById('modalBody').innerHTML=`<div style="text-align:center;padding:40px"><div class="icon" style="font-size:3rem">⚠️</div><p>加载失败</p><a href="${link}" target="_blank" style="color:var(--xdf)">直接打开</a></div>`;
-  });
-}
 function resetSearch(){['fGrade','fSubject','fType','fTeacher'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});const si=document.getElementById('searchInput');if(si)si.value='';doSearch();}
 
 // 收藏
