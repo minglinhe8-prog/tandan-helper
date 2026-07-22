@@ -143,10 +143,10 @@ const GRADES = ['初一','初二','初三'];
 const SUBJECTS = ['博文','双语','托管','实验P','实验C'];
 let catalog = null, allFiles = [];
 
-// 双源加载：先试CDN，失败用本地
+// 优先同源加载，更快更稳
 async function loadCatalog() {
-  try { const r = await fetch(CATALOG_URL); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
   try { const r = await fetch('catalog.json'); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
+  try { const r = await fetch(CATALOG_URL); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
   showContent('<div class="empty"><div class="icon">⚠️</div><h3>加载失败</h3><p>请检查网络连接</p></div>');
 }
 function init() { flatten(); bindNav(); renderTab('search'); loadScripts(); }
