@@ -7,7 +7,6 @@ from datetime import datetime
 from typing import List, Dict, Optional, Union
 from collections import defaultdict
 from PIL import Image
-import requests
 from ai_integration import render_ai_panel, render_policy_card
 
 # ---------- 路径自适应 ----------
