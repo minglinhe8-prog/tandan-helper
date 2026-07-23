@@ -3,276 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>谈单助手 · 新东方</title>
+<title>谈单助手</title>
 <style>
 :root {
-  --xdf: #00A65E; --xdf-d: #00804A; --xdf-l: #E8F5EE; --xdf-ll: #F0FAF4;
-  --accent: #FF6B00; --bg: #F5F7FA; --card: #fff; --t: #1E293B;
-  --ts: #64748B; --tm: #94A3B8; --b: #E2E8F0; --r: 12px;
-  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --p: #4F46E5; --pl: #EEF2FF; --pd: #3730A3;
+  --bg: #F8FAFC; --card: #fff; --t: #1E293B; --ts: #64748B; --tm: #94A3B8;
+  --b: #E2E8F0; --r: 14px; --rs: 8px;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--t); -webkit-tap-highlight-color:transparent; }
-
-.header { background:#fff; border-bottom:1px solid var(--b); position:sticky; top:0; z-index:100; }
-.header-inner { max-width:1200px; margin:0 auto; padding:8px 16px; display:flex; align-items:center; justify-content:space-between; }
-.logo { display:flex; align-items:center; gap:8px; }
-.logo-img { height:28px; width:auto; }
-.logo-text { font-size:0.95rem; font-weight:700; color:#1B6E4A; letter-spacing:0.3px; font-style:italic; }
-.logo-sub { font-size:0.62rem; color:var(--ts); font-weight:600; letter-spacing:0.5px; }
-.nav-tabs { background:#fff; border-bottom:1px solid var(--b); overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch; }
-.nav-tabs-inner { max-width:1200px; margin:0 auto; padding:0 8px; display:flex; }
-.nav-tab { padding:10px 14px; font-size:0.75rem; font-weight:600; border:none; background:none; cursor:pointer; color:var(--ts); border-bottom:3px solid transparent; transition:0.15s; white-space:nowrap; }
-.nav-tab:hover { color:var(--xdf); }
-.nav-tab.active { color:var(--xdf); border-bottom-color:var(--xdf); }
-.hero { background:linear-gradient(135deg, var(--xdf) 0%, #00994D 50%, #00804A 100%); color:#fff; padding:24px 16px 20px; }
-.hero-inner { max-width:1200px; margin:0 auto; }
-.hero h2 { font-size:1.2rem; font-weight:700; }
-.hero p { font-size:0.75rem; opacity:0.9; margin-top:4px; }
-.main-layout { max-width:1200px; margin:0 auto; padding:14px 16px 50px; display:flex; gap:14px; }
-.sidebar { width:250px; flex-shrink:0; display:flex; flex-direction:column; gap:8px; position:sticky; top:100px; align-self:flex-start; max-height:calc(100vh - 120px); overflow-y:auto; scrollbar-width:thin; }
-.content { flex:1; min-width:0; }
-.card-box { background:var(--card); border-radius:var(--r); border:1px solid var(--b); padding:14px; box-shadow:var(--shadow); margin-bottom:10px; }
-.card-box h3 { font-size:0.8rem; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:5px; }
-.card-box select, .card-box input, .card-box textarea { width:100%; padding:8px 10px; border:1px solid var(--b); border-radius:6px; font-size:0.73rem; margin-bottom:7px; background:#fff; color:var(--t); outline:none; transition:border-color 0.15s; }
-.card-box select:focus, .card-box input:focus, .card-box textarea:focus { border-color:var(--xdf); }
-textarea { resize:vertical; min-height:55px; font-family:inherit; }
-.btn { padding:8px 14px; border:none; border-radius:8px; font-weight:700; font-size:0.75rem; cursor:pointer; transition:0.15s; }
-.btn-p { background:var(--xdf); color:#fff; } .btn-p:hover { background:var(--xdf-d); }
-.btn-o { background:#fff; color:var(--xdf); border:1.5px solid var(--xdf); } .btn-o:hover { background:var(--xdf-l); }
-.btn-s { background:#F1F5F9; color:var(--ts); border:1px solid var(--b); }
-.btn-r { background:#EF4444; color:#fff; }
-.btn-a { background:var(--accent); color:#fff; }
-.flex { display:flex; gap:6px; flex-wrap:wrap; }
-.flex > * { flex:1; min-width:80px; }
-.tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:0.62rem; font-weight:600; background:var(--xdf-l); color:var(--xdf); margin:2px; }
-.result-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:8px; }
-.card { background:var(--card); border-radius:var(--r); border:1px solid var(--b); overflow:hidden; box-shadow:var(--shadow); transition:0.2s; display:flex; flex-direction:column; }
-.card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.1); }
-.card-thumb { height:105px; background:#F8FAFC; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; cursor:pointer; }
+.header { background:linear-gradient(135deg,#4F46E5,#7C3AED,#A855F7); padding:20px 16px 16px; color:#fff; position:sticky; top:0; z-index:100; }
+.header h1 { font-size:1.3rem; font-weight:700; letter-spacing:-0.3px; }
+.header .sub { font-size:0.75rem; opacity:0.85; margin-top:2px; }
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:12px 12px 0; }
+.stat { background:#fff; border-radius:10px; padding:12px 8px; text-align:center; border:1px solid var(--b); position:relative; overflow:hidden; }
+.stat::before { content:''; position:absolute; left:0;top:0;width:3px;height:100%;border-radius:2px 0 0 2px; }
+.stat.s0::before { background:#3B82F6; } .stat.s1::before { background:#8B5CF6; }
+.stat.s2::before { background:#F59E0B; } .stat.s3::before { background:#10B981; }
+.stat .n { font-size:1.3rem; font-weight:800; } .stat .l { font-size:0.6rem; color:var(--ts); margin-top:2px; }
+.filters { padding:10px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+.filters select, .filters input { padding:8px 10px; border:1px solid var(--b); border-radius:8px; font-size:0.78rem; background:#fff; color:var(--t); min-width:70px; }
+.filters button { padding:8px 16px; border:none; border-radius:8px; font-weight:600; font-size:0.78rem; cursor:pointer; white-space:nowrap; }
+.btn-search { background:linear-gradient(135deg,#4F46E5,#7C3AED); color:#fff; }
+.btn-reset { background:#fff; color:var(--t); border:1px solid var(--b); }
+.cat-header { display:flex; align-items:center; gap:8px; padding:18px 12px 8px; border-bottom:2px solid var(--b); margin:0 12px; }
+.cat-dot { width:8px; height:8px; border-radius:50%; }
+.cat-title { font-weight:700; font-size:0.9rem; }
+.cat-count { background:#F1F5F9; color:var(--ts); padding:2px 10px; border-radius:12px; font-size:0.65rem; font-weight:600; }
+.results { padding:8px 12px 60px; }
+.result-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.card { background:#fff; border-radius:var(--r); border:1px solid var(--b); overflow:hidden; transition:transform 0.15s,box-shadow 0.15s; }
+.card:active { transform:scale(0.98); }
+.card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+.card-thumb { width:100%; height:110px; background:#F1F5F9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
 .card-thumb img { width:100%; height:100%; object-fit:cover; }
-.card-thumb .ph { font-size:2rem; opacity:0.35; }
-.cb { position:absolute; top:6px; right:6px; padding:2px 6px; border-radius:4px; font-size:0.5rem; font-weight:700; color:#fff; text-transform:uppercase; }
-.cb-img { background:#3B82F6; } .cb-pdf { background:#EF4444; } .cb-xls { background:var(--xdf); }
-.cb-ppt { background:var(--accent); } .cb-link { background:#7C3AED; }
-.card-body { padding:8px 10px; flex:1; display:flex; flex-direction:column; }
-.card-name { font-weight:600; font-size:0.7rem; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-bottom:3px; }
-.card-body .btn-p { display:block; text-align:center; margin-top:auto; font-size:0.68rem; padding:6px 0; border-radius:5px; text-decoration:none; color:#fff; }
-.cat-head { display:flex; align-items:center; gap:8px; padding:8px 0 6px; border-bottom:2px solid var(--xdf-l); margin-bottom:8px; }
-.cat-head .dot { width:8px; height:8px; border-radius:50%; background:var(--xdf); flex-shrink:0; }
-.cat-head .name { font-weight:700; font-size:0.85rem; }
-.cat-head .num { font-size:0.62rem; color:var(--ts); margin-left:auto; background:var(--xdf-l); padding:2px 8px; border-radius:10px; }
-.table-sm { width:100%; border-collapse:collapse; font-size:0.7rem; }
-.table-sm th { background:#F8FAFC; padding:7px 9px; text-align:left; font-size:0.65rem; color:var(--ts); border-bottom:2px solid var(--b); font-weight:600; }
-.table-sm td { padding:7px 9px; border-bottom:1px solid var(--b); }
-.toast { position:fixed; top:16px; left:50%; transform:translateX(-50%); padding:8px 20px; border-radius:20px; font-weight:700; font-size:0.75rem; z-index:999; animation:fadeIn 0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.15); display:none; }
-.toast.ok { background:var(--xdf); color:#fff; } .toast.err { background:#EF4444; color:#fff; }
-@keyframes fadeIn { from{opacity:0;transform:translateX(-50%) translateY(-10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
-.empty { text-align:center; padding:50px 20px; color:var(--ts); }
-.empty .icon { font-size:2.8rem; margin-bottom:10px; }
-.empty h3 { font-size:0.9rem; margin-bottom:4px; }
-.empty p { font-size:0.7rem; }
-.modal { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.5); z-index:300; align-items:center; justify-content:center; }
-.modal.on { display:flex; }
-.modal-box { background:#fff; border-radius:var(--r); padding:16px; width:94%; max-width:640px; max-height:80vh; overflow-y:auto; }
-.modal-box img { width:100%; border-radius:8px; }
-.script-toggle { position:fixed; right:0; top:45%; background:var(--xdf); color:#fff; padding:10px 5px; border-radius:6px 0 0 6px; cursor:pointer; font-size:0.65rem; font-weight:700; writing-mode:vertical-rl; z-index:150; box-shadow:-2px 0 8px rgba(0,0,0,0.1); }
-.script-panel { position:fixed; right:0; top:0; bottom:0; width:320px; background:#fff; box-shadow:-4px 0 20px rgba(0,0,0,0.1); z-index:200; transform:translateX(100%); transition:0.3s; overflow-y:auto; }
-.script-panel.open { transform:translateX(0); }
-.script-panel .head { background:var(--xdf); color:#fff; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; }
-.script-panel .head h3 { font-size:0.9rem; }
-.script-panel .body { padding:14px 16px; font-size:0.75rem; line-height:1.6; }
-.script-panel .body h4 { color:var(--xdf); margin:10px 0 4px; font-size:0.8rem; }
-.script-panel .body ul { padding-left:18px; }
-.script-panel .body li { margin-bottom:3px; }
-
-@media(max-width:768px){
-  .main-layout { flex-direction:column; }
-  .sidebar { width:100%; position:static; flex-direction:row; flex-wrap:wrap; gap:6px; max-height:none; }
-  .sidebar > * { flex:1; min-width:120px; }
-  .result-grid { grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
-  .nav-tab { padding:8px 10px; font-size:0.7rem; }
-  .script-panel { width:100%; }
-}
+.card-badge { position:absolute; top:6px; right:6px; padding:2px 7px; border-radius:8px; font-size:0.55rem; font-weight:700; color:#fff; text-transform:uppercase; }
+.b-png,.b-jpg,.b-jpeg { background:#3B82F6; } .b-pdf { background:#EF4444; }
+.b-xlsx,.b-xls { background:#10B981; } .b-pptx,.b-ppt { background:#F97316; }
+.card-body { padding:8px 10px; }
+.card-name { font-weight:600; font-size:0.72rem; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; word-break:break-all; }
+.card-meta { font-size:0.62rem; color:var(--tm); margin:3px 0 6px; }
+.card-open { display:block; text-align:center; padding:7px 0; border-radius:6px; background:linear-gradient(135deg,#4F46E5,#7C3AED); color:#fff; font-weight:600; font-size:0.72rem; text-decoration:none; margin:0 10px 10px; }
+.empty { text-align:center; padding:60px 20px; color:var(--ts); }
+.empty .icon { font-size:3rem; margin-bottom:12px; }
+.empty h2 { font-size:1.1rem; margin-bottom:6px; }
+.tip-box { background:#EEF2FF; border-radius:8px; padding:10px 14px; margin:4px 12px 12px; font-size:0.75rem; color:var(--p); }
+@media(min-width:768px){ .result-grid { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); } .header { padding:24px 24px 20px; } .filters { padding:10px 24px; } .results { padding:8px 24px 60px; } .stats { padding:12px 24px 0; } .cat-header { margin:0 24px; } }
+@media(min-width:1024px){ .result-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); } }
 </style>
 </head>
 <body>
 
-<div class="header"><div class="header-inner">
-  <div class="logo">
-    <svg viewBox="0 0 240 54" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;">
-      <defs><linearGradient id="xg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1B6E4A"/><stop offset="100%" stop-color="#145A3A"/></linearGradient></defs>
-      <text x="0" y="38" font-family="'STKaiti','KaiTi','SimHei',serif" font-size="38" font-weight="900" font-style="italic" fill="url(#xg)" letter-spacing="3">新东方</text>
-      <text x="0" y="52" font-family="Arial Black,Arial,sans-serif" font-size="11" font-weight="900" font-style="italic" fill="#FF6B00" letter-spacing="0.5">XDF.CN</text>
-    </svg>
-  </div>
-  <div style="font-size:0.7rem;color:var(--ts);">谈单助手 v2</div>
-</div></div>
-
-<div class="nav-tabs"><div class="nav-tabs-inner" id="navTabs">
-  <button class="nav-tab active" data-tab="search">🔍 物料检索</button>
-  <button class="nav-tab" data-tab="wizard">🎯 智能推荐</button>
-  <button class="nav-tab" data-tab="calc">💰 报价快算</button>
-  <button class="nav-tab" data-tab="crm">📋 客户意向</button>
-  <button class="nav-tab" data-tab="school">🏫 校情速查</button>
-  <button class="nav-tab" data-tab="competitor">⚔️ 竞品对比</button>
-  <button class="nav-tab" data-tab="share">📤 分享卡片</button>
-  <button class="nav-tab" data-tab="stats">📊 数据看板</button>
-</div></div>
-
-<div class="hero"><div class="hero-inner"><h2>高效谈单，精准推荐</h2><p>物料检索 · 智能推荐 · 报价快算 · 客户管理</p></div></div>
-
-<div class="main-layout">
-  <div class="sidebar" id="sidebar"></div>
-  <div class="content" id="contentArea"></div>
+<div class="header">
+  <h1>谈单助手</h1>
+  <div class="sub">课程物料 · 话术辅助 · 快速检索</div>
 </div>
 
-<div class="script-toggle" onclick="toggleScript()" title="话术参考">💬 话术</div>
-<div class="script-panel" id="scriptPanel">
-  <div class="head"><h3>💬 话术参考</h3><button onclick="toggleScript()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">✕</button></div>
-  <div class="body" id="scriptBody"></div>
+<div class="stats" id="stats"></div>
+
+<div class="filters">
+  <select id="fGrade" onchange="doSearch()"><option value="">全部年级</option></select>
+  <select id="fSubject" onchange="doSearch()"><option value="">全部科目</option></select>
+  <select id="fType" onchange="doSearch()"><option value="">全部(线上/线下)</option></select>
+  <select id="fSemester" onchange="doSearch()"><option value="">全部学期</option></select>
+  <input id="fTeacher" placeholder="老师姓名" style="flex:0.5;min-width:80px;" oninput="doSearch()">
+  <button class="btn-reset" onclick="resetFilters()">重置</button>
+  <button class="btn-search" onclick="doSearch()">搜索</button>
 </div>
 
-<div class="modal" id="modal" onclick="this.classList.remove('on')"><div class="modal-box" onclick="event.stopPropagation()"><div id="modalBody"></div></div></div>
-<div id="toast"></div>
+<div class="results" id="results">
+  <div class="empty"><div class="icon">📘</div><h2>选择筛选条件后点击搜索</h2><p>或直接点"搜索"查看全部资源</p></div>
+</div>
 
 <script>
-// ═══════════ Data ═══════════
-const CATALOG_URL = 'https://raw.githubusercontent.com/minglinhe8-prog/tandan-helper/master/catalog.json';
+let catalog = null;
 const GRADES = ['初一','初二','初三'];
 const SUBJECTS = ['博文','双语','托管','实验P','实验C'];
-let catalog = null, allFiles = [];
+const TYPES = ['线上','线下'];
+const SEMESTERS = ['暑秋','寒春'];
+const CAT_COLORS = {'课表':'#3B82F6','课程大纲':'#8B5CF6','老师介绍':'#F59E0B','政策':'#EF4444','优惠价格':'#10B981'};
+const CAT_ICONS = {'课表':'🗓️','课程大纲':'📖','老师介绍':'👨‍🏫','政策':'📋','优惠价格':'💰'};
 
-// 双源加载：先试CDN，失败用本地
-async function loadCatalog() {
-  try { const r = await fetch(CATALOG_URL); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
-  try { const r = await fetch('catalog.json'); if (r.ok) { catalog = await r.json(); init(); return; } } catch(e) {}
-  showContent('<div class="empty"><div class="icon">⚠️</div><h3>加载失败</h3><p>请检查网络连接</p></div>');
-}
-function init() { flatten(); bindNav(); renderTab('search'); loadScripts(); }
-loadCatalog();
+fetch('https://raw.githubusercontent.com/minglinhe8-prog/tandan-helper/master/catalog.json').then(r => r.json()).then(data => {
+    catalog = data;
+    initFilters();
+    showStats();
+}).catch(() => {
+    document.getElementById('results').innerHTML = '<div class="empty"><div class="icon">⚠️</div><h2>加载失败</h2></div>';
+});
 
-function flatten() { allFiles = []; for (const [cat, files] of Object.entries(catalog.categories)) files.forEach(f => { f.category = cat; allFiles.push(f); }); }
-
-function bindNav() {
-  document.querySelectorAll('.nav-tab').forEach(b => b.onclick = () => {
-    document.querySelectorAll('.nav-tab').forEach(x => x.classList.remove('active'));
-    b.classList.add('active'); renderTab(b.dataset.tab);
-  });
-}
-
-function loadScripts() {
-  document.getElementById('scriptBody').innerHTML = `
-    <h4>📞 暑秋续班</h4><ul><li>续班期内报名享全年最大优惠，热门老师名额先到先得</li><li>现在续班锁定名额，7天无理由退费保障</li><li>老学员专享价 + 推荐新学员双方优惠</li></ul>
-    <h4>💰 价格异议</h4><ul><li>强调师资背景——985/211名师、平均教龄5年+</li><li>小班教学——每班限人数，个性化关注</li><li>课后服务——作业批改、学情反馈、定期家长沟通</li><li>横向算：孩子一节课 = 一杯奶茶钱，但效果天差地别</li></ul>
-    <h4>🏫 距离异议</h4><ul><li>推荐线上同步课程，效果不打折</li><li>就近校区推荐，多校区可选</li><li>提供免费试听课，先体验再决定</li></ul>
-    <h4>📊 效果质疑</h4><ul><li>展示真实学员案例和提分数据</li><li>强调阶段性测评 + 针对性辅导</li><li>效果可视化——每阶段学习报告</li></ul>`;
+function initFilters() {
+    const g = document.getElementById('fGrade');
+    GRADES.forEach(v => { const o = document.createElement('option'); o.value=v; o.textContent=v; g.appendChild(o); });
+    const s = document.getElementById('fSubject');
+    SUBJECTS.forEach(v => { const o = document.createElement('option'); o.value=v; o.textContent=v; s.appendChild(o); });
+    const t = document.getElementById('fType');
+    TYPES.forEach(v => { const o = document.createElement('option'); o.value=v; o.textContent=v; t.appendChild(o); });
+    const sem = document.getElementById('fSemester');
+    SEMESTERS.forEach(v => { const o = document.createElement('option'); o.value=v; o.textContent=v; sem.appendChild(o); });
 }
 
-// ═══════════ Tabs ═══════════
-function renderTab(tab) {
-  document.getElementById('sidebar').innerHTML = '';
-  document.getElementById('contentArea').innerHTML = '';
-  switch(tab) { case 'search':renderSearchTab();break; case 'wizard':renderWizardTab();break; case 'calc':renderCalcTab();break; case 'crm':renderCRMTab();break; case 'school':renderSchoolTab();break; case 'competitor':renderCompetitorTab();break; case 'share':renderShareTab();break; case 'stats':renderStatsTab();break; }
+function showStats() {
+    if (!catalog) return;
+    const cats = catalog.categories;
+    const n1 = (cats['课表']||[]).length;
+    const n2 = (cats['课程大纲']||[]).length;
+    const n3 = (cats['老师介绍']||[]).length + (cats['政策']||[]).length + (cats['优惠价格']||[]).length;
+    document.getElementById('stats').innerHTML =
+        `<div class="stat s0"><div class="n">${n1}</div><div class="l">课表文件</div></div>
+         <div class="stat s1"><div class="n">${n2}</div><div class="l">课程大纲</div></div>
+         <div class="stat s2"><div class="n">${n3}</div><div class="l">师资·政策·优惠</div></div>
+         <div class="stat s3"><div class="n">就绪</div><div class="l">数据状态</div></div>`;
 }
-function showContent(h) { document.getElementById('contentArea').innerHTML = h; }
-function sidebarHTML(h) { document.getElementById('sidebar').innerHTML = h; }
 
-// ═══════════ 1. 物料检索 ═══════════
-function renderSearchTab() {
-  sidebarHTML(`<div class="card-box"><h3>🔍 筛选</h3>
-    <select id="fGrade" onchange="doSearch()"><option value="">全部年级</option>${GRADES.map(g=>'<option>'+g+'</option>').join('')}</select>
-    <select id="fSubject" onchange="doSearch()"><option value="">全部科目</option>${SUBJECTS.map(s=>'<option>'+s+'</option>').join('')}</select>
-    <select id="fType" onchange="doSearch()"><option value="">全部类型</option><option>线上</option><option>线下</option></select>
-    <input id="fTeacher" placeholder="老师姓名（可选）" oninput="doSearch()">
-    <button class="btn btn-p" onclick="doSearch()" style="width:100%">搜索</button>
-    <button class="btn btn-o" onclick="resetSearch()" style="width:100%;margin-top:4px">重置条件</button></div>
-    <div class="card-box"><h3>⭐ 收藏</h3><div id="favList"><span style="font-size:0.68rem;color:var(--tm)">暂无收藏</span></div></div>
-    <div class="card-box"><h3>🕒 历史</h3><div id="histList"><span style="font-size:0.68rem;color:var(--tm)">暂无记录</span></div></div>`);
-  showContent(`<input id="searchInput" placeholder="搜索文件名..." oninput="doSearch()" style="width:100%;padding:10px;border:1px solid var(--b);border-radius:10px;font-size:0.82rem;margin-bottom:10px;box-shadow:var(--shadow);"><div id="resultsArea"></div>`);
-  renderFavs(); renderHistory(); doSearch();
+function matchAny(text, values) {
+    if (!values) return true;
+    return values.split(',').some(v => v.trim() && text.includes(v.trim()));
 }
 
 function doSearch() {
-  const grade = document.getElementById('fGrade')?.value || '';
-  const subject = document.getElementById('fSubject')?.value || '';
-  const type = document.getElementById('fType')?.value || '';
-  const teacher = (document.getElementById('fTeacher')?.value || '').trim();
-  const kw = (document.getElementById('searchInput')?.value || '').toLowerCase();
-  const groups = {};
-  allFiles.forEach(f => {
-    let ok = true;
-    if (kw && !(f.name.toLowerCase().includes(kw) || f.path.includes(kw))) ok = false;
-    if (!ok) return;
-    switch(f.category) {
-      case '课表': if(grade && !(f.grade===grade || f.name.includes(grade))) ok=false; if(ok&&type&&!(f.type===type||f.name.includes(type))) ok=false; break;
-      case '课程大纲': if(grade && !(f.grade===grade || (f.parent_dirs||[]).some(d=>d.includes(grade)) || f.name.includes(grade))) ok=false; if(ok&&subject&&!(f.subject===subject||f.name.includes(subject))) ok=false; if(ok&&type&&f.type!==type) ok=false; break;
-      case '老师介绍': if(subject&&!(f.subject===subject||f.name.includes(subject))) ok=false; if(teacher&&!f.name.includes(teacher)) ok=false; break;
-      case '政策': if(grade&&!f.name.includes(grade)) ok=false; break;
-      case '优惠价格': if(grade&&!f.name.includes(grade)) ok=false; break;
+    if (!catalog) return;
+    const grade = document.getElementById('fGrade').value;
+    const subject = document.getElementById('fSubject').value;
+    const type = document.getElementById('fType').value;
+    const semester = document.getElementById('fSemester').value;
+    const teacher = document.getElementById('fTeacher').value.trim();
+
+    let html = '';
+    let totalFound = 0;
+
+    for (const [catName, files] of Object.entries(catalog.categories)) {
+        let filtered = files;
+
+        // 按类别分层过滤
+        if (catName === '课表') {
+            // 课表: 年级 + 线上/线下 + 学期
+            if (grade) filtered = filtered.filter(f => f.grade === grade || f.name.includes(grade));
+            if (type) filtered = filtered.filter(f => f.type === type);
+            if (semester) filtered = filtered.filter(f => f.name.includes(semester));
+        } else if (catName === '课程大纲') {
+            // 大纲: 年级 + 科目 + 线上/线下, 不按学期、不按老师
+            if (grade) filtered = filtered.filter(f => f.grade === grade || (f.parent_dirs||[]).some(d=>d.includes(grade)) || f.name.includes(grade));
+            if (subject) filtered = filtered.filter(f => (f.subject||'') === subject || f.name.includes(subject));
+            if (type) filtered = filtered.filter(f => f.type === type);
+        } else if (catName === '老师介绍') {
+            // 老师: 科目 + 老师名
+            if (subject) filtered = filtered.filter(f => (f.subject||'') === subject || f.name.includes(subject));
+            if (teacher) filtered = filtered.filter(f => f.name.includes(teacher));
+            if (grade) filtered = filtered; // 老师不按年级过滤
+        } else if (catName === '政策') {
+            // 政策: 年级
+            if (grade) filtered = filtered.filter(f => f.name.includes(grade));
+        } else if (catName === '优惠价格') {
+            // 优惠: 年级
+            if (grade) filtered = filtered.filter(f => f.name.includes(grade));
+        }
+
+        if (filtered.length === 0) continue;
+        totalFound += filtered.length;
+
+        const color = CAT_COLORS[catName] || '#64748B';
+        const icon = CAT_ICONS[catName] || '📁';
+        html += `<div class="cat-header">
+          <div class="cat-dot" style="background:${color}"></div>
+          <span>${icon}</span>
+          <div class="cat-title">${catName}</div>
+          <div class="cat-count">${filtered.length} 个</div>
+        </div><div class="result-grid">`;
+
+        filtered.forEach(f => {
+            const url = f.cdn_url || f.raw_url || f.url;
+            const isImg = ['png','jpg','jpeg','gif','bmp'].includes(f.ext);
+            const isOffice = ['pptx','ppt','xlsx','xls'].includes(f.ext);
+
+            // 微软 Office Online 在线预览（需要公网可访问的URL）
+            let openUrl = url;
+            let openLabel = '打开';
+            let openAttr = 'target="_blank"';
+            if (f.is_link) {
+                openLabel = '🌐 在线文档';
+            }
+
+            const thumb = isImg ? `<img src="${url}" loading="lazy" alt="${f.name}" onerror="this.parentElement.innerHTML='<span style=font-size:2rem>🖼️</span>'">` :
+                `<div style="font-size:2rem;">${f.ext==='pdf'?'📄':isOffice?'📽️':'📁'}</div>`;
+
+            let tags = [];
+            if (f.grade) tags.push(f.grade);
+            if (f.type) tags.push(f.type);
+            if (f.subject) tags.push(f.subject);
+
+            html += `<div class="card">
+            <div class="card-thumb">
+              ${thumb}
+              <span class="card-badge b-${f.ext}">${f.ext.toUpperCase()}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-name">${f.name}</div>
+              ${tags.length ? `<div class="card-meta">${tags.join(' · ')}</div>` : `<div class="card-meta">${f.size_kb} KB</div>`}
+            </div>
+            <a class="card-open" href="${openUrl}" ${openAttr}>${openLabel}</a>
+          </div>`;
+        });
+        html += '</div>';
     }
-    if(ok) { if(!groups[f.category]) groups[f.category]=[]; groups[f.category].push(f); }
-  });
-  const icons={'课表':'🗓️','课程大纲':'📖','老师介绍':'👨‍🏫','政策':'📋','优惠价格':'💰'};
-  let h='';
-  for(const [cat,items] of Object.entries(groups)){
-    h+=`<div class="cat-head"><span class="dot"></span>${icons[cat]||'📁'} <span class="name">${cat}</span><span class="num">${items.length}个</span></div><div class="result-grid">`;
-    items.forEach(f=>{
-      const url=f.url||f.cdn_url||f.raw_url;
-      const isImg=['png','jpg','jpeg','gif','bmp'].includes(f.ext);
-      const B={'png':'img','jpg':'img','pdf':'pdf','xlsx':'xls','xls':'xls','pptx':'ppt','ppt':'ppt','txt':'link'};
-      let tags=''; if(f.grade) tags+=`<span class=tag>${f.grade}</span>`; if(f.subject) tags+=`<span class=tag>${f.subject}</span>`; if(f.type) tags+=`<span class=tag>${f.type}</span>`;
-      h+=`<div class="card"><div class="card-thumb" onclick="if('${f.ext}'==='png'||'${f.ext}'==='jpg')previewImg('${url}')">${isImg?`<img src="${url}" loading=lazy onerror="this.innerHTML='<div class=ph>🖼️</div>'">`:`<div class="ph">${f.ext==='pdf'?'📄':f.ext.match(/xls/)?'📊':f.ext.match(/ppt/)?'📽️':'📁'}</div>`}<span class="cb cb-${B[f.ext]||'img'}">${f.ext.toUpperCase()}</span></div><div class="card-body"><div class="card-name">${f.name}</div>${tags?`<div style="margin:4px 0">${tags}</div>`:''}<a class="btn-p" href="${url}" target="_blank" onclick="addHist'${f.path.replace(/'/g,'\\\'')}','${f.name.replace(/'/g,'\\\'')}')');if('${f.ext}'==='pdf'){event.preventDefault();viewPDF('${url}','${f.name.replace(/'/g,"\x27")}');}">打开</a>打开</a></div></div>`;
-    });
-    h+='</div>';
-  }
-  document.getElementById('resultsArea').innerHTML=h||'<div class="empty"><div class="icon">🔍</div><h3>无匹配结果</h3><p>试试调整筛选条件</p></div>';
+
+    if (!totalFound) {
+        html = '<div class="empty"><div class="icon">🔍</div><h2>未找到匹配资源</h2><p>试试调整筛选条件</p></div>';
+    } else {
+        html = `<div class="tip-box">找到 ${totalFound} 个资源 — 点击卡片「打开」直接查看</div>` + html;
+    }
+
+    document.getElementById('results').innerHTML = html;
 }
-function viewPDF(u,n){var m=document.getElementById("modal");m.classList.add("on");document.getElementById("modalBody").innerHTML="<div style=text-align:center;padding:60px><div style=font-size:3rem>⏳</div><p>"+n+"</p><p style=font-size:0.7rem;color:#888>正在拉取PDF</p></div>";fetch(u).then(function(r){return r.blob()}).then(function(b){var z=URL.createObjectURL(b);window.location.href=z;}).catch(function(e){document.getElementById("modalBody").innerHTML="<div style=text-align:center;padding:60px><div style=font-size:3rem>⚠️</div><p>"+n+" 拉取失败</p><a href="+u+" target=_blank>点此原生打开</a></div>";});}
-function previewImg(url){document.getElementById('modalBody').innerHTML=`<img src="${url}">`;document.getElementById('modal').classList.add('on');}
-function resetSearch(){['fGrade','fSubject','fType','fTeacher'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});const si=document.getElementById('searchInput');if(si)si.value='';doSearch();}
 
-// 收藏
-function F(){try{return JSON.parse(localStorage.getItem('td_favs')||'[]')}catch{return[]}}
-function toggleFav(p,n){let f=F();const i=f.findIndex(x=>x.path===p);if(i>=0)f.splice(i,1);else f.push({path:p,name:n,time:Date.now()});localStorage.setItem('td_favs',JSON.stringify(f));renderFavs();toast(i>=0?'已取消收藏':'已收藏⭐');}
-function renderFavs(){const f=F(),el=document.getElementById('favList');if(!el)return;el.innerHTML=f.length?f.slice(-15).reverse().map(x=>`<div style="font-size:0.68rem;padding:3px 0;cursor:pointer;border-bottom:1px solid var(--b)" onclick="document.getElementById('searchInput').value='${x.name}';doSearch()">⭐ ${x.name}</div>`).join(''):'<span style="font-size:0.68rem;color:var(--tm)">暂无收藏</span>';}
+function resetFilters() {
+    document.getElementById('fGrade').value = '';
+    document.getElementById('fSubject').value = '';
+    document.getElementById('fType').value = '';
+    document.getElementById('fSemester').value = '';
+    document.getElementById('fTeacher').value = '';
+    doSearch();
+}
 
-// 历史
-function H(){try{return JSON.parse(localStorage.getItem('td_hist')||'[]')}catch{return[]}}
-function addHist(p,n){let h=H().filter(x=>x.path!==p);h.push({path:p,name:n,time:Date.now()});if(h.length>30)h=h.slice(-30);localStorage.setItem('td_hist',JSON.stringify(h));renderHistory();}
-function renderHistory(){const h=H(),el=document.getElementById('histList');if(!el)return;el.innerHTML=h.length?h.reverse().slice(0,10).map(x=>`<div style="font-size:0.68rem;padding:3px 0;cursor:pointer;border-bottom:1px solid var(--b)" onclick="document.getElementById('searchInput').value='${x.name}';doSearch()">🕒 ${x.name}</div>`).join(''):'<span style="font-size:0.68rem;color:var(--tm)">暂无记录</span>';}
-
-// ═══════════ 2. 智能推荐 ═══════════
-function renderWizardTab(){sidebarHTML('');showContent(`<div class="card-box"><h3>🎯 智能推荐向导</h3><p style="font-size:0.72rem;color:var(--ts);margin-bottom:10px;">选年级和类型，系统自动聚合所有相关物料</p><div class="flex"><select id="wGrade"><option value="">选择年级</option>${GRADES.map(g=>'<option>'+g+'</option>').join('')}</select><select id="wType"><option value="">全部</option><option>线上</option><option>线下</option></select><button class="btn btn-p" onclick="runWizard()">生成推荐报告</button></div></div><div class="card-box" id="wizardResult"><div class="empty"><div class="icon">🎯</div><h3>先选条件再生成</h3><p>一次呈现该年级全部课表、大纲、师资、价格</p></div></div>`);}
-function runWizard(){const g=document.getElementById('wGrade').value,t=document.getElementById('wType').value;if(!g){toast('请先选择年级','err');return}const icons={'课表':'🗓️','课程大纲':'📖','老师介绍':'👨‍🏫','政策':'📋','优惠价格':'💰'};let h=`<h3 style="color:var(--xdf);margin-bottom:10px;">📋 ${g} ${t} 推荐报告</h3>`;for(const[nm,files]of Object.entries(catalog.categories)){let f=files;if(nm==='课表'){f=files.filter(x=>x.grade===g||x.name.includes(g)||(x.parent_dirs||[]).some(d=>d.includes(g)));if(t)f=f.filter(x=>x.type===t||x.name.includes(t))}else if(nm==='课程大纲'){f=files.filter(x=>x.grade===g||x.name.includes(g)||(x.parent_dirs||[]).some(d=>d.includes(g)));if(t)f=f.filter(x=>x.type===t)}else if(nm==='老师介绍'){/*不按年级*/}else if(nm==='政策'){f=files.filter(x=>x.name.includes(g))}else if(nm==='优惠价格'){f=files.filter(x=>x.name.includes(g))}if(!f.length)continue;h+=`<div class="cat-head"><span class="dot"></span>${icons[nm]||'📁'} <span class="name">${nm}</span><span class="num">${f.length}个</span></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">${f.slice(0,10).map(x=>`<a href="${x.url||x.cdn_url||x.raw_url}" target="_blank" style="padding:5px 10px;background:var(--xdf-l);border-radius:6px;font-size:0.68rem;color:var(--xdf);text-decoration:none;font-weight:600;" onclick="addHist('${x.path}','${x.name}')">${x.name.slice(0,25)}</a>`).join('')}</div>`}document.getElementById('wizardResult').innerHTML=h;}
-
-// ═══════════ 3. 报价快算 ═══════════
-function renderCalcTab(){sidebarHTML('');const prices=catalog.categories['优惠价格']||[];const sheets=(catalog.categories['课表']||[]).filter(f=>f.ext==='xlsx');showContent(`<div class="card-box"><h3>💰 报价快算</h3><p style="font-size:0.72rem;color:var(--ts);margin-bottom:8px;">价格参考 + 自定义计算</p><h4 style="font-size:0.75rem;margin-bottom:6px;">参考价格</h4><div style="max-height:180px;overflow-y:auto;margin-bottom:10px;">${prices.map(f=>`<a href="${f.url||f.cdn_url}" target="_blank" style="display:block;padding:6px;font-size:0.72rem;border-bottom:1px solid var(--b);color:var(--xdf);text-decoration:none;font-weight:600;">💰 ${f.name}</a>`).join('')}</div><h4 style="font-size:0.75rem;margin-bottom:6px;">快捷计算器</h4><div class="flex"><input id="calcBase" placeholder="单科价格" type="number"><input id="calcCount" placeholder="科目数" type="number" value="1"></div><select id="calcDiscount"><option value="1">无优惠</option><option value="0.95">95折(续班)</option><option value="0.9">9折(多科)</option><option value="0.85">85折(推荐)</option></select><div id="calcResult" style="font-size:1.5rem;font-weight:800;color:var(--xdf);text-align:center;padding:12px;background:var(--xdf-l);border-radius:8px;margin-top:8px;">¥0</div><button class="btn btn-p" onclick="doCalc()" style="width:100%">计算</button></div>`);}
-function doCalc(){const b=parseFloat(document.getElementById('calcBase').value)||0,c=parseInt(document.getElementById('calcCount').value)||1,d=parseFloat(document.getElementById('calcDiscount').value);const t=b*c*d;document.getElementById('calcResult').innerHTML=`<div>小计 ¥${(b*c).toLocaleString()}</div><div style="font-size:0.8rem;opacity:0.8;">${d<1?'× '+(d*100)+'折':''} =</div><div style="font-size:2rem;">¥${t.toLocaleString()}</div>`;}
-
-// ═══════════ 4. 客户意向 ═══════════
-function renderCRMTab(){sidebarHTML('');const leads=getLeads();showContent(`<div class="card-box"><h3>📋 新增意向</h3><div class="flex"><input id="ldName" placeholder="家长称呼"><input id="ldPhone" placeholder="手机号"></div><div class="flex"><select id="ldGrade"><option value="">年级</option>${GRADES.map(g=>'<option>'+g+'</option>').join('')}</select><input id="ldBudget" placeholder="预算(元)"></div><textarea id="ldNote" placeholder="备注：意向课程"></textarea><button class="btn btn-p" onclick="addLead()" style="width:100%">💾 保存</button></div><div class="card-box"><h3>客户列表 (${leads.length})</h3>${leads.length?`<table class="table-sm"><thead><tr><th>称呼</th><th>电话</th><th>年级</th><th>预算</th><th>备注</th><th>时间</th><th></th></tr></thead><tbody>${leads.slice(-30).reverse().map((l,i)=>`<tr><td>${l.name||'-'}</td><td>${l.phone||'-'}</td><td>${l.grade||'-'}</td><td>${l.budget?'¥'+l.budget:'-'}</td><td style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(l.note||'').slice(0,25)}</td><td style="font-size:0.6rem;">${new Date(l.time).toLocaleDateString()}</td><td><button class="btn-s" style="padding:2px 6px;font-size:0.6rem;" onclick="delLead(${leads.length-1-i})">✕</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty"><div class="icon">📋</div><h3>暂无客户</h3></div>'}</div>`);}
-function getLeads(){try{return JSON.parse(localStorage.getItem('td_leads')||'[]')}catch{return[]}}
-function addLead(){const l={name:document.getElementById('ldName').value,phone:document.getElementById('ldPhone').value,grade:document.getElementById('ldGrade').value,budget:document.getElementById('ldBudget').value,note:document.getElementById('ldNote').value,time:Date.now()};if(!l.name&&!l.phone){toast('请至少填写称呼或电话','err');return}const leads=getLeads();leads.push(l);localStorage.setItem('td_leads',JSON.stringify(leads));toast('已保存✅');renderCRMTab();}
-function delLead(i){const leads=getLeads();leads.splice(i,1);localStorage.setItem('td_leads',JSON.stringify(leads));renderCRMTab();}
-
-// ═══════════ 5. 校情速查 ═══════════
-function renderSchoolTab(){sidebarHTML('');showContent(`<div class="card-box"><h3>🏫 广州各区升学速查</h3><table class="table-sm"><thead><tr><th>区域</th><th>升学方式</th><th>重点学校</th><th>政策要点</th></tr></thead><tbody><tr><td><strong>番禺区</strong></td><td>对口直升+摇号</td><td>番禺实验、仲元中学</td><td>户籍优先，非户籍积分入学</td></tr><tr><td><strong>天河区</strong></td><td>多校划片</td><td>天河中学、113中</td><td>学位预警，入户年限要求</td></tr><tr><td><strong>海珠区</strong></td><td>对口直升为主</td><td>海珠实验、南武中学</td><td>部分初中电脑派位</td></tr><tr><td><strong>越秀区</strong></td><td>电脑派位</td><td>省实、执信、广雅</td><td>优质学位竞争激烈</td></tr><tr><td><strong>白云区</strong></td><td>对口直升+摇号</td><td>白云实验、培英中学</td><td>来穗人员积分入学</td></tr><tr><td><strong>荔湾区</strong></td><td>电脑派位</td><td>真光中学、西关培英</td><td>部分学校可直升</td></tr><tr><td><strong>黄埔区</strong></td><td>对口直升</td><td>86中、玉岩中学</td><td>新建学校较多</td></tr><tr><td><strong>南沙区</strong></td><td>对口直升</td><td>南沙一中、广大附中南沙</td><td>集团化办学合作</td></tr></tbody></table><p style="font-size:0.62rem;color:var(--ts);margin-top:6px;">数据参考2025年，以官方发布为准</p></div>`);}
-
-// ═══════════ 6. 竞品对比 ═══════════
-function renderCompetitorTab(){sidebarHTML('');showContent(`<div class="card-box"><h3>⚔️ 新东方 vs 竞品</h3><table class="table-sm"><thead><tr><th>维度</th><th style="color:var(--xdf)">✅ 新东方</th><th>学而思</th><th>作业帮</th></tr></thead><tbody><tr><td><strong>师资</strong></td><td>985/211名师+6轮选拔</td><td>清北标签</td><td>AI+人工双师</td></tr><tr><td><strong>班型</strong></td><td>1V1/小班/大班灵活选</td><td>标准化大班</td><td>线上录播+直播</td></tr><tr><td><strong>服务</strong></td><td>作业批改+学情反馈+家长沟通</td><td>APP推送报告</td><td>AI自动批改</td></tr><tr><td><strong>价格</strong></td><td>性价比高+续班优惠</td><td>定价偏高</td><td>价格较低</td></tr><tr><td><strong>网点</strong></td><td>全国300+校区</td><td>200+校区</td><td>无线下（纯线上）</td></tr><tr><td><strong>教材</strong></td><td>自研+校本化适配</td><td>自研标准化</td><td>AI个性化</td></tr></tbody></table></div><div class="card-box"><h3>💬 应对话术</h3><p style="font-size:0.72rem;margin:6px 0;"><strong>vs学而思：</strong>"老师都经过6轮选拔，平均教龄5年+，清北标签≠教学质量。"</p><p style="font-size:0.72rem;margin:6px 0;"><strong>vs作业帮：</strong>"AI再好也替代不了真人老师。面对面互动+课后跟踪，线上AI做不到。"</p><p style="font-size:0.72rem;margin:6px 0;"><strong>vs价格：</strong>"便宜的不一定划算。我们课后服务和学情跟踪下来，性价比是最高的。"</p></div>`);}
-
-// ═══════════ 7. 分享卡片 ═══════════
-function renderShareTab(){sidebarHTML('');const templates=[{t:'暑秋续班推荐',b:'假期保持学习节奏，开学领先一步。\n续班专属优惠限时抢！'},{t:'名师课堂',b:'专业诊断+精准提分。\n个性化教学方案，效果看得见。'},{t:'升学规划',b:'政策变化早知道，少走弯路。\n专业规划师一对一咨询。'}];showContent(`<div class="card-box"><h3>📤 生成分享卡片</h3><div class="flex"><input id="shTitle" placeholder="标题"><select id="shTpl" onchange="applyTpl()"><option value="">模板</option>${templates.map((t,i)=>'<option value="'+i+'">'+t.t+'</option>').join('')}</select></div><textarea id="shBody" placeholder="内容..." style="min-height:80px"></textarea><button class="btn btn-p" onclick="generateCard()" style="width:100%">🖼️ 生成</button><div id="cardPreview" style="margin-top:10px;"></div></div>`);window._tpl=templates;}
-function applyTpl(){const v=document.getElementById('shTpl').value;if(!v&&v!=='0')return;const t=window._tpl[parseInt(v)];document.getElementById('shTitle').value=t.t;document.getElementById('shBody').value=t.b;}
-function generateCard(){const ti=document.getElementById('shTitle').value||'谈单助手',bo=document.getElementById('shBody').value||'新东方 · 课程咨询';const h=`<div style="background:linear-gradient(135deg,#00A65E,#00804A);color:#fff;border-radius:16px;padding:28px;text-align:center;max-width:380px;margin:0 auto;box-shadow:0 8px 30px rgba(0,166,94,0.3)"><div style="font-size:0.65rem;opacity:0.8;margin-bottom:6px;">XDF.CN · 课程咨询</div><div style="font-size:1.15rem;font-weight:800;margin-bottom:10px;">${ti}</div><div style="font-size:0.75rem;opacity:0.95;white-space:pre-line;line-height:1.7;">${bo}</div><div style="border-top:1px solid rgba(255,255,255,0.3);margin-top:14px;padding-top:12px;font-size:0.62rem;opacity:0.7;">扫码咨询 · 获取专属学习方案</div></div>`;document.getElementById('cardPreview').innerHTML=h+'<p style="text-align:center;font-size:0.65rem;color:var(--ts);margin-top:8px;">📸 截图发送给家长即可</p>';toast('卡片已生成📸');}
-
-// ═══════════ 8. 数据看板 ═══════════
-function renderStatsTab(){sidebarHTML('');const leads=getLeads(),favs=F(),hist=H();const gs={};leads.forEach(l=>{const g=l.grade||'未知';gs[g]=(gs[g]||0)+1});showContent(`<div class="card-box"><h3>📊 数据看板</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:14px;"><div style="background:var(--xdf-l);padding:14px;border-radius:10px;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:var(--xdf)">${allFiles.length}</div><div style="font-size:0.65rem;color:var(--ts)">物料</div></div><div style="background:#FEF3C7;padding:14px;border-radius:10px;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:#F59E0B">${leads.length}</div><div style="font-size:0.65rem;color:var(--ts)">客户</div></div><div style="background:#DBEAFE;padding:14px;border-radius:10px;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:#3B82F6">${favs.length}</div><div style="font-size:0.65rem;color:var(--ts)">收藏</div></div><div style="background:#D1FAE5;padding:14px;border-radius:10px;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:#10B981">${hist.length}</div><div style="font-size:0.65rem;color:var(--ts)">浏览</div></div></div><h4 style="font-size:0.78rem;margin-bottom:8px;">年级分布</h4><div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">${Object.entries(gs).map(([g,n])=>`<div style="flex:1;min-width:60px;text-align:center;padding:8px;background:var(--xdf-l);border-radius:8px"><div style="font-weight:800;color:var(--xdf)">${n}</div><div style="font-size:0.62rem;color:var(--ts)">${g}</div></div>`).join('')||'<div style="font-size:0.7rem;color:var(--ts)">暂无数据</div>'}</div><h4 style="font-size:0.78rem;margin-bottom:8px;">最近客户</h4>${leads.length?`<table class="table-sm"><tbody>${leads.slice(-5).reverse().map(l=>`<tr><td>${l.name||'-'}</td><td>${l.phone||'-'}</td><td>${l.grade||'-'}</td><td>${l.budget?'¥'+l.budget:'-'}</td><td style="font-size:0.6rem;">${new Date(l.time).toLocaleDateString()}</td></tr>`).join('')}</tbody></table>`:'<div style="font-size:0.7rem;color:var(--ts)">暂无</div>'}</div>`);}
-
-// ═══════════ Utils ═══════════
-function toggleScript(){document.getElementById('scriptPanel').classList.toggle('open');}
-function toast(m,t='ok'){const e=document.getElementById('toast');e.className='toast '+t;e.textContent=m;e.style.display='block';setTimeout(()=>e.style.display='none',2500);}
+setTimeout(() => { if (catalog) doSearch(); }, 500);
 </script>
+
 </body>
 </html>
