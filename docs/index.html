@@ -371,7 +371,7 @@ function previewOrOpen(url, ext) {
     document.getElementById('previewContent').innerHTML = `<img src="${url}" style="width:100%">`;
     document.getElementById('previewModal').classList.add('on');
   } else {
-    window.open(url, '_blank');
+    location.href = url;
   }
 }
 
